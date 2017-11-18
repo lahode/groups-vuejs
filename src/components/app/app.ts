@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { HomeComponent } from '../home';
+import { GroupComponent } from '../group';
+import { NewGroupComponent } from '../new-group';
 
 import './app.scss';
 

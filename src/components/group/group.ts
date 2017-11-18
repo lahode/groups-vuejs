@@ -2,10 +2,10 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
-import './home.scss';
+import './group.scss';
 
 @Component({
-    template: require('./home.html'),
+    template: require('./group.html'),
 })
-export class HomeComponent extends Vue {
+export class GroupComponent extends Vue {
 }
