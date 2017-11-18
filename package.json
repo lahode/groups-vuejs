@@ -1,0 +1,62 @@
+{
+  "name": "groups",
+  "description": "",
+  "version": "1.0.0",
+  "author": "Fredrik Lahode",
+  "license": "",
+  "private": true,
+  "engines": {
+    "node": ">=6",
+    "npm": ">=3"
+  },
+  "scripts": {
+    "build": "cross-env NODE_ENV=production npm run clean && npm run compile",
+    "clean": "rimraf dist",
+    "compile": "webpack --config config/webpack.config.prod.js",
+    "dev": "webpack-dev-server --hot --inline",
+    "lint": "tslint src/**/*.ts",
+    "serve": "http-server dist/ -g -o"
+  },
+  "dependencies": {
+    "@types/vue": "^2.0.0",
+    "@types/webpack-env": "^1.13.2",
+    "vue-class-component": "~6.1.0",
+    "vue-property-decorator": "~6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "~8.0.47",
+    "autoprefixer": "^7.1.6",
+    "awesome-typescript-loader": "~3.3.0",
+    "bootstrap-sass": "^3.3.7",
+    "compression-webpack-plugin": "~1.0.1",
+    "copy-webpack-plugin": "~4.2.0",
+    "cross-env": "~5.1.1",
+    "css-loader": "^0.28.7",
+    "es6-promise": "~4.1.1",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "favicons-webpack-plugin": "0.0.7",
+    "file-loader": "^1.1.5",
+    "html-webpack-plugin": "^2.30.1",
+    "http-server": "~0.10.0",
+    "json-loader": "~0.5.7",
+    "lodash.merge": "~4.6.0",
+    "minimist": "~1.2.0",
+    "ncp": "~2.0.0",
+    "node-sass": "~4.6.0",
+    "opn-cli": "~3.1.0",
+    "postcss-loader": "^2.0.8",
+    "purify-css": "^1.2.5",
+    "purifycss-webpack": "^0.7.0",
+    "raw-loader": "~0.5.1",
+    "rimraf": "~2.6.2",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
+    "tslint": "~5.8.0",
+    "tslint-loader": "~3.5.3",
+    "typescript": "~2.6.1",
+    "url-loader": "^0.6.2",
+    "vue-hot-reload-api": "^2.2.3",
+    "webpack": "~3.8.1",
+    "webpack-dev-server": "~2.9.4"
+  }
+}
