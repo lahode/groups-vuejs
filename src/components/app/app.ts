@@ -10,7 +10,7 @@ import './app.scss';
 @Component({
     template: require('./app.html'),
     components: {
-      appHome : HomeComponent,
+      appHome : NewGroupComponent,
       appMenu : MenuComponent
     }
 })

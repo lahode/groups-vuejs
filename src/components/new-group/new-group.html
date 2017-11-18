@@ -3,27 +3,54 @@
   <div class="container">
     <div class="form-group">
       <label for="name">Groupe name</label>
-      <input type="text" class="form-control" id="name" />
+      <input type="text" class="form-control" id="name" v-model="group.name" />
     </div>
     <div class="form-group">
       <label for="description">Description</label>
-      <textarea class="form-control" id="description"></textarea>
+      <textarea class="form-control" id="description" v-model="group.description"></textarea>
     </div>
     <div class="form-group">
       <label for="url">URL</label>
-      <input type="text" class="form-control" id="url" />
+      <input type="text" class="form-control" id="url" :value="group.url" @input="changeUrl" />
     </div>
     <div class="form-group">
       <label for="access">Access</label>
-      <select class="form-control" id="access">
-        <option value="">Anyone can see the list of members</option>
-        <option value="">Only the owner can see the list of members</option>
+      <select class="form-control" id="access" v-model.number="group.access">
+        <option v-for="(opt, index) in accessOptions" :value="index">{{ opt }}</option>
       </select>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox"> Public</label>
+      <label><input type="checkbox" v-model="group.pub"> Public</label>
       <p><small>A 'public' group can be used by...</small></p>
     </div>
-    <button type="submit" class="btn btn-primary">OK</button>    
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" @click="save()">OK</button>
+    <p>{{ group }}</p>
   </div>
+
+  <!-- Modal -->
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Group to Save</h4>
+        </div>
+        <div class="modal-body" v-if="showPopup">
+          <p>Name: {{ group.name }}</p>
+          <p style="white-space: pre">Description: {{ group.description }}</p>
+          <p>URL: {{ group.url }}</p>
+          <p>Access: {{ accessOptions[group.access] }}</p>
+          <p>Public: {{ group.pub ? 'Oui' : 'Non' }}</p>
+          <p>Visibility: {{ group.visibility ? 'Oui' : 'Non' }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" @click="showPopup = false">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div>
