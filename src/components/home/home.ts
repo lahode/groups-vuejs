@@ -34,7 +34,6 @@ export const groups = [
 })
 export class HomeComponent extends Vue {
     groups: Group[] = [];
-    groupDetail: Group | null = null;
     logGroupSeen: string[] = [];
     groupCount: number = 0;
     maxPerPage: number = MAX_PER_PAGE;
@@ -47,6 +46,9 @@ export class HomeComponent extends Vue {
 
     // Lorsque le composant est initialisé, ajoute un listener Eventbus
     // permettant de mettre à jour les logs
+    // Attention EventBus.$on() écoute uniquement les événements qui ont été
+    // envoyé avec this.$emit depuis ce controleur ou un contrôleur enfant
+    // Pour que le log fonctionne, utilisez VueX ou un enregistrement via localstorage
     mounted() {
         EventBus.$on('latestGroup', (latestGroup: any) => {
             this.logGroupSeen.push(latestGroup);
@@ -54,13 +56,8 @@ export class HomeComponent extends Vue {
     }
 
     // Affiche le composant "Détail d'un groupe"
-    showGroup(group: Group) {
-        this.groupDetail = group;
-    }
-
-    // Affiche le composant "Liste des groupes"
-    hideGroup() {
-        this.groupDetail = null;
+    showGroup(groupID: number) {
+        this.$router.push({ name: 'group', params: {id: '' + groupID}});
     }
 
     // Récupère le nombre total des groupes et sélectionne les groupes à afficher

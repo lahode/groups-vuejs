@@ -23,6 +23,6 @@ export class GroupComponent extends Vue {
     }
 
     quitGroupDetail() {
-        this.$emit('hideGroup');
+        this.$router.push({ name: 'home'});
     }
 }
