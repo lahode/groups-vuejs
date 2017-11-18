@@ -6,7 +6,7 @@
         <span class="label">ID</span>
       </div>
       <div class="col col-sm-8">
-        <span>G11117</span>
+        <span>{{ group.id}}&nbsp;</span>
       </div>
     </div>
     <div class="row">
@@ -14,7 +14,7 @@
         <span class="label">Owner</span>
       </div>
       <div class="col col-sm-8">
-        <span><a href="">Han Solo</a></span>
+        <span><a href="" v-if="group.owner">{{ group.owner.firstname }} {{ group.owner.lastname }}</a>&nbsp;</span>
       </div>
     </div>
     <div class="row">
@@ -22,7 +22,7 @@
         <span class="label">Description</span>
       </div>
       <div class="col col-sm-8">
-        <span>Membre du groupe IDEVELOP</span>
+        <span>{{ group.description }}&nbsp;</span>
       </div>
     </div>
     <div class="row">
@@ -30,7 +30,7 @@
         <span class="label">URL</span>
       </div>
       <div class="col col-sm-8">
-        <span>&nbsp;</span>
+        <span>{{ group.url }}&nbsp;</span>
       </div>
     </div>  
     <div class="row">
@@ -38,7 +38,7 @@
         <span class="label">Public</span>
       </div>
       <div class="col col-sm-8">
-        <span>Non</span>
+        <span>{{ group.public ? 'Oui' : 'Non' }}&nbsp;</span>
       </div>
     </div>
     <div class="row">
@@ -49,14 +49,13 @@
         <span>2015-03-11 13:59:30</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" v-if="group.members">
       <div class="col col-sm-4">
-        <span class="label">2 membres</span>
+        <span class="label">{{ getMemberCount() }} membres</span>
       </div>
       <div class="col col-sm-8">
         <ul>
-          <li><a href="#">Jon Do</a></li>
-          <li><a href="#">Henri Emmanuel</a></li>
+          <li v-for="member in group.members"><a href="#">{{ member.firstname }} {{ member.lastname}}</a></li>
         </ul>
       </div>
     </div>

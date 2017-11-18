@@ -2,49 +2,13 @@
   <h2>Groups you own</h2>
   <div class="container">
     <div class="row">
-      <div class="col-sm-4">
-        <div class="card">
-          <h3>BOUsers</h3>
-          <p>Utilisateurs BO</p>
+      <div class="col-sm-4" v-if="groups" v-for="group in groups">
+        <div class="card" :class="group.access ? 'private' : ''">
+          <h3>{{ group.name }}</h3>
+          <p>{{ group.description }}</p>
         </div>
       </div>
-      <div class="col-sm-4">
-        <div class="card">
-          <h3>COSI</h3>
-          <p>Membres et invités de la COSI</p>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="card private">
-          <h3>DIT-SB_WinTeam</h3>
-          <p>membres de la WinTeam</p>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="card">
-          <h3>DIT-WinTeam-SQL</h3>
-          <p>Groupe concerné</p>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="card">
-          <h3>IDEVELOP</h3>
-          <p>Membres du groupe IDEVELOP</p>
-        </div>
-      </div>
-      <div class="col-sm-4">
-          <div class="card private">
-            <h3>IDEVELOP-testeurs-frontend</h3>
-            <p>Membres du groupe IDEVELOP testeur</p>
-          </div>
-        </div>
-      </div>
+    </div>
   </div>
-  <ul class="pagination">
-    <li class="active"><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-  </ul>
+  <app-pager></app-pager>
 </div>

@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
+import { PagerComponent } from '../pager';
+
 import { Group } from '../../models/group.model';
 import { User } from '../../models/user.model';
 
@@ -23,9 +25,16 @@ export const groups = [
 
 @Component({
     template: require('./home.html'),
+    components: {
+        appPager : PagerComponent
+    }
 })
 export class HomeComponent extends Vue {
     groups: Group[];
+
+    created() {
+        this.getGroups();
+    }
 
     getGroups() {
         this.groups = groups;
