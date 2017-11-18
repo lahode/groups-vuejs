@@ -1,5 +1,5 @@
 <div id="group">
-  <h2>Details on group 'IDEVELOP'</h2>
+  <h2>Details on group '{{ group.name}}'</h2>
   <div class="container">
     <div class="row">
       <div class="col col-sm-4">
@@ -60,4 +60,7 @@
       </div>
     </div>
   </div>
+  <p style="text-align:center;padding-top:50px;">
+    <button class="btn btn-primary" @click="quitGroupDetail()">Back To Home</button>
+  </p>
 </div>

@@ -11,17 +11,13 @@ import './group.scss';
     template: require('./group.html'),
 })
 export class GroupComponent extends Vue {
-    group: Group;
-
-    created() {
-        const user1 = new User('soloh', 'Han', 'Solo');
-        const user2 = new User('doj', 'Jon', 'Do');
-        const user3 = new User('emmanuelh', 'Henri', 'Emmanuel');
-
-        this.group = new Group('G11117', 'IDEVELOP', 0, true, user1, 'Membres du groupe IDEVELOP', '', [user2, user3]);
-    }
+    @Prop() group: Group;
 
     getMemberCount() {
         return this.group.members ? this.group.members.length : '';
+    }
+
+    quitGroupDetail() {
+        this.$emit('hideGroup');
     }
 }

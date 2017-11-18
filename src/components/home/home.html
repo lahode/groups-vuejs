@@ -1,14 +1,19 @@
 <div id="home">
-  <h2>Groups you own</h2>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-4" v-if="groups" v-for="group in groups">
-        <div class="card" :class="group.access ? 'private' : ''">
-          <h3>{{ group.name }}</h3>
-          <p>{{ group.description }}</p>
+  <div v-if="groupDetail">
+    <app-group :group="groupDetail" @hideGroup="hideGroup"></app-group>
+  </div>
+  <div v-else>
+    <h2>Groups you own</h2>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4" v-if="groups" v-for="group in groups">
+          <div class="card" :class="group.access ? 'private' : ''" @click="showGroup(group)">
+            <h3>{{ group.name }}</h3>
+            <p>{{ group.description }}</p>
+          </div>
         </div>
       </div>
     </div>
+    <app-pager></app-pager>
   </div>
-  <app-pager></app-pager>
 </div>

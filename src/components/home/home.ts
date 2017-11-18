@@ -3,6 +3,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 import { PagerComponent } from '../pager';
+import { GroupComponent } from '../group';
 
 import { Group } from '../../models/group.model';
 import { User } from '../../models/user.model';
@@ -26,14 +27,24 @@ export const groups = [
 @Component({
     template: require('./home.html'),
     components: {
-        appPager : PagerComponent
+        appPager : PagerComponent,
+        appGroup: GroupComponent
     }
 })
 export class HomeComponent extends Vue {
     groups: Group[];
+    groupDetail: Group | null = null;
 
     created() {
         this.getGroups();
+    }
+
+    showGroup(group: Group) {
+        this.groupDetail = group;
+    }
+
+    hideGroup() {
+        this.groupDetail = null;
     }
 
     getGroups() {
