@@ -7,6 +7,7 @@ const appComponent = () => import('./components/app').then(({ AppComponent }) =>
 import './sass/main.scss';
 
 export const EventBus = new Vue();
+export const MAX_PER_PAGE = 6;
 
 if (process.env.ENV === 'development' && module.hot) {
   const appModuleId = './components/app';

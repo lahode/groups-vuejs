@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <app-pager></app-pager>
+    <app-pager :total-elements="groupCount" :max-per-page="maxPerPage" :current-pos="fromto.from" @fromTo="changeResult"></app-pager>
     <div class="log">
       <ul>
         <li v-for="grouplog in logGroupSeen">{{ grouplog }}</li>

@@ -7,7 +7,7 @@ import { GroupComponent } from '../group';
 
 import { Group } from '../../models/group.model';
 import { User } from '../../models/user.model';
-import { EventBus } from '../../main';
+import { EventBus, MAX_PER_PAGE } from '../../main';
 
 import './home.scss';
 
@@ -33,29 +33,56 @@ export const groups = [
     }
 })
 export class HomeComponent extends Vue {
-    groups: Group[];
+    groups: Group[] = [];
     groupDetail: Group | null = null;
     logGroupSeen: string[] = [];
+    groupCount: number = 0;
+    maxPerPage: number = MAX_PER_PAGE;
+    fromto: any = {from: 0, to: MAX_PER_PAGE - 1};
 
+    // Lance la récupération des groupes à la création du composant
     created() {
         this.getGroups();
     }
 
+    // Lorsque le composant est initialisé, ajoute un listener Eventbus
+    // permettant de mettre à jour les logs
     mounted() {
         EventBus.$on('latestGroup', (latestGroup: any) => {
             this.logGroupSeen.push(latestGroup);
         });
     }
 
+    // Affiche le composant "Détail d'un groupe"
     showGroup(group: Group) {
         this.groupDetail = group;
     }
 
+    // Affiche le composant "Liste des groupes"
     hideGroup() {
         this.groupDetail = null;
     }
 
+    // Récupère le nombre total des groupes et sélectionne les groupes à afficher
     getGroups() {
-        this.groups = groups;
+        this.groupCount = groups.length;
+        this.getGroupRange();
     }
+
+    // Modifie la tranche des groupes à afficher (Pagination)
+    changeResult(fromTo: any) {
+        this.fromto = fromTo;
+        this.getGroupRange();
+    }
+
+    // Sélectionne la tranche des groupe à afficher pour l'affichage
+    getGroupRange() {
+        this.groups = [];
+        for (let i = this.fromto.from; i <= this.fromto.to; i++) {
+            if (i < groups.length) {
+                this.groups.push(groups[i]);
+            }
+        }
+    }
+
 }
