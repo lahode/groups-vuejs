@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
+import { SwitchInputComponent } from '../switch-input';
 
 import { Group } from '../../models/group.model';
 import { User } from '../../models/user.model';
@@ -13,6 +14,9 @@ export const options = ['Anyone can see the list of members',
 
 @Component({
     template: require('./new-group.html'),
+    components: {
+        switchInput: SwitchInputComponent
+    }
 })
 export class NewGroupComponent extends Vue {
     group: Group = new Group('', '', 0, false, user1);
