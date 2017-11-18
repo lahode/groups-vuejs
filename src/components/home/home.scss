@@ -2,7 +2,7 @@
   h2 {
     font-weight: normal;
   }
-
+  
   .card {
     background-color: #eee;
     box-shadow: 10px 10px 5px #888888;
@@ -21,9 +21,19 @@
   }
 
   .pagination {
-    padding-top: 80px;
+    padding-top: 50px;
     display: block;
     margin: 0 auto;
+    height: 85px;
     width: 200px;
   }
+
+  .log {
+    width: 50%;
+    height: 100px;
+    border: 2px dotted #aaa;
+    margin: 0 auto;
+    overflow: scroll;
+  }
+  
 }

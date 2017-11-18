@@ -6,6 +6,8 @@ const appComponent = () => import('./components/app').then(({ AppComponent }) =>
 
 import './sass/main.scss';
 
+export const EventBus = new Vue();
+
 if (process.env.ENV === 'development' && module.hot) {
   const appModuleId = './components/app';
 

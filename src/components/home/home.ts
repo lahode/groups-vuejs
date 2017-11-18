@@ -7,6 +7,7 @@ import { GroupComponent } from '../group';
 
 import { Group } from '../../models/group.model';
 import { User } from '../../models/user.model';
+import { EventBus } from '../../main';
 
 import './home.scss';
 
@@ -34,9 +35,16 @@ export const groups = [
 export class HomeComponent extends Vue {
     groups: Group[];
     groupDetail: Group | null = null;
+    logGroupSeen: string[] = [];
 
     created() {
         this.getGroups();
+    }
+
+    mounted() {
+        EventBus.$on('latestGroup', (latestGroup: any) => {
+            this.logGroupSeen.push(latestGroup);
+        });
     }
 
     showGroup(group: Group) {
