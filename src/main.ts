@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import { AppComponent } from './components/app';
 import { makeHot, reload } from './util/hot-reload';
+import { createRouter } from './router';
 
 const appComponent = () => import('./components/app').then(({ AppComponent }) => AppComponent);
 
@@ -20,6 +21,7 @@ if (process.env.ENV === 'development' && module.hot) {
 
 new Vue({
   el: '#app',
+  router: createRouter(),
   components: {
     'app': appComponent
   }

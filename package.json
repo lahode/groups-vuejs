@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@types/vue": "^2.0.0",
+    "@types/vue-router": "^2.0.0",
     "@types/webpack-env": "^1.13.2",
     "vue-class-component": "~6.1.0",
     "vue-property-decorator": "~6.0.0"
