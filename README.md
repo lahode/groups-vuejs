@@ -16,3 +16,16 @@ npm run lint
 
 # build for production with minification
 npm run build
+
+
+## Run server
+
+# install server
+cd server
+npm install
+
+# serve with nodemon
+npm run dev
+
+# build for production
+npm run prod

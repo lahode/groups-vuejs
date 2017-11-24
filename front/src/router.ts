@@ -10,9 +10,9 @@ const groupComponent = () => import('./components/group').then(({ GroupComponent
 // Charge New group component en lazy loading
 const newGroupComponent = resolve => {
   require.ensure(['./components/new-group'], () => {
-    resolve((<any>require('./components/new-group')).NewGroupComponent)
-  })
-}
+    resolve((<any>require('./components/new-group')).NewGroupComponent);
+  });
+};
 
 export const user1 = new User('soloh', 'Han', 'Solo');
 export const user2 = new User('doj', 'Jon', 'Do');
