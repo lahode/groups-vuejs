@@ -1,0 +1,136 @@
+{
+	"variables": [],
+	"info": {
+		"name": "groups-server (EPFL)",
+		"_postman_id": "9e2575a3-693a-6e81-0f22-e6209dfaaf12",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"url": "localhost:4300/login",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"soloh\",\n  \"password\" : \"test\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Signup",
+			"request": {
+				"url": "http://localhost:4300/signup",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"firstname\": \"Simon\",\n  \"lastname\": \"Templar\",\n  \"username\": \"templars\",\n  \"password\" : \"test\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Check authentication",
+			"request": {
+				"url": "http://localhost:4300/api/check-auth",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNvbG9oIiwiZmlyc3RuYW1lIjoiSGFuIiwibGFzdG5hbWUiOiJTb2xvIiwiX2lkIjoiVzlsOGJpRHlJZWZYcEtnSCIsImlhdCI6MTUxMTI2MDMxOSwiZXhwIjoxNTExMzQ2NzE5fQ.nD4-9y_LwGqmEU3GbBhejh__ltmBYSPovZJKDtYINGc",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get all groups",
+			"request": {
+				"url": "http://localhost:4300/api/groups/all/0/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNvbG9oIiwiZmlyc3RuYW1lIjoiSGFuIiwibGFzdG5hbWUiOiJTb2xvIiwiX2lkIjoiVzlsOGJpRHlJZWZYcEtnSCIsImlhdCI6MTUxMjAzNDkzNSwiZXhwIjoxNTEyMTIxMzM1fQ.8JWDsBto-k0cx_H6_ESuGVrUudgbfm2PJcnu734rMbY",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get single group",
+			"request": {
+				"url": "http://localhost:4300/api/groups/get/Ar8CMdc6ycgnQq6a",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNvbG9oIiwiZmlyc3RuYW1lIjoiSGFuIiwibGFzdG5hbWUiOiJTb2xvIiwiX2lkIjoiVzlsOGJpRHlJZWZYcEtnSCIsImlhdCI6MTUxMjAzNDkzNSwiZXhwIjoxNTEyMTIxMzM1fQ.8JWDsBto-k0cx_H6_ESuGVrUudgbfm2PJcnu734rMbY",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Save group",
+			"request": {
+				"url": "http://localhost:4300/api/groups/save",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNvbG9oIiwiZmlyc3RuYW1lIjoiSGFuIiwibGFzdG5hbWUiOiJTb2xvIiwiX2lkIjoiVzlsOGJpRHlJZWZYcEtnSCIsImlhdCI6MTUxMjAzNDkzNSwiZXhwIjoxNTEyMTIxMzM1fQ.8JWDsBto-k0cx_H6_ESuGVrUudgbfm2PJcnu734rMbY",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"DIT-WinTeam-SQl2\",\n    \"access\": 0,\n    \"pub\": true,\n    \"owner\": \"EtW9n83RvQSYnpNJ\",\n    \"description\": \"Groupe concerné\",\n    \"url\": \"\",\n    \"members\": [],\n    \"visibility\": true,\n    \"_id\": \"Ar8CMdc6ycgnQq6a\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
