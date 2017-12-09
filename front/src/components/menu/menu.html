@@ -7,10 +7,16 @@
       <router-link :to="{ name: 'home'}"
                     tag="li"
                     active-class="active"
+                    v-if="isAuth"
                     exact><a>Home</a></router-link>
       <router-link :to="{ name: 'new-group'}"
                     tag="li"
+                    v-if="isAuth"
                     active-class="active"><a>New group</a></router-link>
+      <li v-if="isAuth"><a @click="logout()">Log out</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" v-if="user">
+      <li><a>{{ user.firstname }} {{ user.lastname }}</a></li>
     </ul>
   </div>
 </nav>

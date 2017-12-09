@@ -5,7 +5,7 @@ export class Group {
                 public name: string,
                 public access: number,
                 public pub: boolean,
-                public owner: User,
+                public owner: User | string,
                 public description?: string,
                 public url?: string,
                 public members?: User[],

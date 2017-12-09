@@ -19,7 +19,7 @@ if (process.env.ENV === 'development' && module.hot) {
   // const newGroupModuleId = './components/new-group';
   const groupModuleId = './components/group';
   const loginModuleId = './components/login';
-  
+
   makeHot(homeModuleId, homeComponent,
     module.hot.accept('./components/home', () => reload(homeModuleId, (<any>require('./components/home')).HomeComponent)));
 
@@ -41,27 +41,56 @@ function loadGroupfromRouter(route) {
   };
 }
 
+// Check if user is authenticated
+function checkAuth(checkIfAuth, next) {
+  let token = localStorage.getItem('token');
+  axios.get(process.env.ENDPOINT + 'api/check-auth', {
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  }).then((response) => {
+      if (checkIfAuth) {
+        next();
+      }
+      else {
+        next('home');
+      }
+    })
+    .catch((error) => {
+      if (checkIfAuth) {
+        next('login');
+      }
+      else {
+        next();
+      }
+    });
+}
+
 export const createRoutes: () => RouteConfig[] = () => [
   {
     path: '/',
     component: homeComponent,
-    name: 'home'
+    name: 'home',
+    beforeEnter: (to, from, next) => checkAuth(true, next)
   },
   {
     path: '/group/new',
     component: newGroupComponent,
-    name: 'new-group'
+    name: 'new-group',
+    beforeEnter: (to, from, next) => checkAuth(true, next)
   },
   {
     path: '/group/:id/detail',
     component: groupComponent,
     name: 'group',
-    props: loadGroupfromRouter
+    props: loadGroupfromRouter,
+    beforeEnter: (to, from, next) => checkAuth(true, next)
   },
   {
     path: '/login',
     component: loginComponent,
-    name: 'login'
+    name: 'login',
+    beforeEnter: (to, from, next) => checkAuth(false, next)
   },
   {
     path: '*',
