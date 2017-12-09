@@ -5,6 +5,7 @@ import { SwitchInputComponent } from '../switch-input';
 import axios, {AxiosResponse} from 'axios';
 
 import { Group } from '../../models/group.model';
+import { store } from '../../store';
 
 import './new-group.scss';
 
@@ -44,7 +45,7 @@ export class NewGroupComponent extends Vue {
 
     save() {
         let token = localStorage.getItem('token');
-        let owner = JSON.parse(localStorage.getItem('user'));
+        let owner = store.state.user;
         this.group._id = undefined;
         this.group.owner = owner._id;
         axios.post(process.env.ENDPOINT + 'api/groups/save/', this.group, {

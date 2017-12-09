@@ -3,6 +3,8 @@ import { AppComponent } from './components/app';
 import { makeHot, reload } from './util/hot-reload';
 import { createRouter } from './router';
 
+import { store } from './store';
+
 const appComponent = () => import('./components/app').then(({ AppComponent }) => AppComponent);
 
 import './sass/main.scss';
@@ -22,6 +24,7 @@ if (process.env.ENV === 'development' && module.hot) {
 new Vue({
   el: '#app',
   router: createRouter(),
+  store,
   components: {
     'app': appComponent
   }

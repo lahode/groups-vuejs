@@ -25,7 +25,6 @@ export class SignupComponent extends Vue {
         axios.post(process.env.ENDPOINT + 'signup', {firstname: this.firstname, lastname: this.lastname, username: this.username, password: this.password})
         .then((response) => {
             localStorage.setItem('token', response.data.token);
-            localStorage.setItem('user', JSON.stringify(response.data.user));
             this.$router.push({ name: 'home'});
         })
         .catch((error) => {

@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import VueRouter, { Location, Route, RouteConfig } from 'vue-router';
 import { makeHot, reload } from './util/hot-reload';
-import axios, {AxiosResponse} from 'axios';
+
+import { store } from './store';
 
 const homeComponent = () => import('./components/home').then(({ HomeComponent }) => HomeComponent);
 const groupComponent = () => import('./components/group').then(({ GroupComponent }) => GroupComponent);
@@ -48,27 +49,17 @@ function loadGroupfromRouter(route) {
 
 // Check if user is authenticated
 function checkAuth(checkIfAuth, next) {
-  let token = localStorage.getItem('token');
-  axios.get(process.env.ENDPOINT + 'api/check-auth', {
-    headers: {
-      'Authorization': 'Bearer ' + token
+  store.dispatch('updateUser').then((user) => {
+    if (user && !checkIfAuth) {
+      next('home');
     }
-  }).then((response) => {
-      if (checkIfAuth) {
-        next();
-      }
-      else {
-        next('home');
-      }
-    })
-    .catch((error) => {
-      if (checkIfAuth) {
-        next('login');
-      }
-      else {
-        next();
-      }
-    });
+    else if (!user && checkIfAuth) {
+      next('login');
+    }
+    else {
+      next();
+    }
+  });
 }
 
 export const createRoutes: () => RouteConfig[] = () => [
