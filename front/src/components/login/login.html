@@ -7,5 +7,6 @@
     <input type="password" id="password" class="form-control" placeholder="Password" v-model="password">
     <button type="button" class="btn btn-lg btn-primary btn-block" @click="login()">Sign in</button>
   </form>
+  <router-link :to="{ name: 'signup'}" tag="button" class="btn btn-info">Go to Signup form</router-link>
   <p v-if="error" style="text-align:center; color: #F00">{{ error }}</p>  
 </div>

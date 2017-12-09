@@ -1,0 +1,16 @@
+<div class="signup container">
+  <form class="form-signin">
+    <h2 class="form-signin-heading">Sign up with a new user</h2>
+    <label for="password" class="sr-only">Firstname</label>
+    <input type="text" id="firstname" class="form-control" placeholder="Firstname" v-model="firstname">
+    <label for="password" class="sr-only">Lastname</label>
+    <input type="text" id="lastname" class="form-control" placeholder="Lastname" v-model="lastname">
+    <label for="username" class="sr-only">Username</label>
+    <input type="text" id="username" class="form-control" placeholder="Username" v-model="username">
+    <label for="password" class="sr-only">Password</label>
+    <input type="password" id="password" class="form-control" placeholder="Password" v-model="password">
+    <button type="button" class="btn btn-lg btn-primary btn-block" @click="signup()">Sign up</button>
+  </form>
+  <router-link :to="{ name: 'login'}" tag="button" class="btn btn-info">Go to Login form</router-link>
+  <p v-if="error" style="text-align:center; color: #F00">{{ error }}</p>
+</div>
