@@ -1,29 +1,15 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
+import axios, {AxiosResponse} from 'axios';
 
 import { PagerComponent } from '../pager';
 import { GroupComponent } from '../group';
 
 import { Group } from '../../models/group.model';
-import { User } from '../../models/user.model';
 import { EventBus, MAX_PER_PAGE } from '../../main';
 
 import './home.scss';
-
-export const user1 = new User('soloh', 'Han', 'Solo');
-export const user2 = new User('doj', 'Jon', 'Do');
-export const user3 = new User('emmanuelh', 'Henri', 'Emmanuel');
-
-export const groups = [
-    new Group('G11113', 'BOUsers', 0, true, user2, 'Utilisateurs BO', '', [user1]),
-    new Group('G11114', 'COSI', 0, true, user2, 'Membres et invités de la COSI', '', [user1, user3]),
-    new Group('G11115', 'DIT-SB_WinTeam', 1, true, user1, 'membres de la WinTeam'),
-    new Group('G11116', 'DIT-WinTeam-SQL', 0, true, user1, 'Groupe concerné'),
-    new Group('G11117', 'IDEVELOP', 0, true, user1, 'Membres du groupe IDEVELOP', '', [user2, user3]),
-    new Group('G11118', 'IDEVELOP-testeurs-frontend', 1, true, user1, 'Membres du groupe IDEVELOP testeur', '', [user2, user3]),
-    new Group('G11119', 'Autre groupe', 0, true, user3, 'Membres du groupe IDEVELOP', '', [user2]),
-];
 
 @Component({
     template: require('./home.html'),
@@ -33,6 +19,8 @@ export const groups = [
     }
 })
 export class HomeComponent extends Vue {
+    axios: any;
+    error: any = '';
     groups: Group[] = [];
     logGroupSeen: string[] = [];
     groupCount: number = 0;
@@ -41,7 +29,8 @@ export class HomeComponent extends Vue {
 
     // Lance la récupération des groupes à la création du composant
     created() {
-        this.getGroups();
+        this.axios = axios;
+        this.getGroupRange();
     }
 
     // Lorsque le composant est initialisé, ajoute un listener Eventbus
@@ -60,12 +49,6 @@ export class HomeComponent extends Vue {
         this.$router.push({ name: 'group', params: {id: '' + groupID}});
     }
 
-    // Récupère le nombre total des groupes et sélectionne les groupes à afficher
-    getGroups() {
-        this.groupCount = groups.length;
-        this.getGroupRange();
-    }
-
     // Modifie la tranche des groupes à afficher (Pagination)
     changeResult(fromTo: any) {
         this.fromto = fromTo;
@@ -75,11 +58,16 @@ export class HomeComponent extends Vue {
     // Sélectionne la tranche des groupe à afficher pour l'affichage
     getGroupRange() {
         this.groups = [];
-        for (let i = this.fromto.from; i <= this.fromto.to; i++) {
-            if (i < groups.length) {
-                this.groups.push(groups[i]);
-            }
-        }
+        let from = this.fromto.from;
+        let to = this.fromto.to;
+        this.axios.get(process.env.ENDPOINT + 'api/groups/all/' + from + '/' + to)
+            .then((response) => {
+                this.groups = response.data.groups;
+                this.groupCount = response.data.total;
+            })
+            .catch((error) => {
+                this.error = error.response ? error.response.data.message : 'Erreur de connexion au serveur';
+            });
     }
 
 }

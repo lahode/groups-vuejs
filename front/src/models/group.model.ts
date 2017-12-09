@@ -1,7 +1,7 @@
 import { User } from './user.model';
 
 export class Group {
-    constructor(public id: string,
+    constructor(public _id: string,
                 public name: string,
                 public access: number,
                 public pub: boolean,

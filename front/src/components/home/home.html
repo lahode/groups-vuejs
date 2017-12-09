@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-4" v-if="groups" v-for="(group, index) in groups">
-        <div class="card" :class="group.access ? 'private' : ''" @click="showGroup(index + fromto.from)">
+        <div class="card" :class="group.access ? 'private' : ''" @click="showGroup(group._id)">
           <h3>{{ group.name }}</h3>
           <p>{{ group.description }}</p>
         </div>
@@ -11,6 +11,7 @@
     </div>
   </div>
   <app-pager :total-elements="groupCount" :max-per-page="maxPerPage" :current-pos="fromto.from" @fromTo="changeResult"></app-pager>
+  <p v-if="error" style="text-align:center; color: #F00">{{ error }}</p>
   <div class="log">
     <ul>
       <li v-for="grouplog in logGroupSeen">{{ grouplog }}</li>

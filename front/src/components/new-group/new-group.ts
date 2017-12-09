@@ -2,13 +2,12 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { SwitchInputComponent } from '../switch-input';
+import axios, {AxiosResponse} from 'axios';
 
 import { Group } from '../../models/group.model';
-import { User } from '../../models/user.model';
 
 import './new-group.scss';
 
-export const user1 = new User('soloh', 'Han', 'Solo');
 export const options = ['Anyone can see the list of members',
                         'Only the owner can see the list of members'];
 
@@ -19,9 +18,11 @@ export const options = ['Anyone can see the list of members',
     }
 })
 export class NewGroupComponent extends Vue {
-    group: Group = new Group('', '', 0, false, user1);
+    axios: any;
+    error: string = '';
+    group: Group = new Group('', '', 0, false, null);
     accessOptions: string[] = [];
-    showPopup: boolean = false;
+    groupSaved: boolean = false;
 
     created() {
         this.accessOptions = options;
@@ -35,7 +36,21 @@ export class NewGroupComponent extends Vue {
         this.group.visibility = visibility;
     }
 
+    goToHomePage() {
+        if (this.groupSaved) {
+            this.$router.push({ name: 'home'});
+        }
+    }
+
     save() {
-        this.showPopup = true;
+        this.group._id = undefined;
+        axios.post(process.env.ENDPOINT + 'api/groups/save/', this.group)
+        .then((response) => {
+            this.groupSaved = true;
+        })
+        .catch((error) => {
+            this.error = error.response ? error.response.data.message : 'Erreur de connexion au serveur';
+        });
+
     }
 }

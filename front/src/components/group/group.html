@@ -1,12 +1,12 @@
 <div id="group">
-  <h2>Details on group '{{ group.name}}'</h2>
-  <div class="container">
+  <h2 v-if="group">Details on group '{{ group.name}}'</h2>
+  <div class="container" v-if="group">
     <div class="row">
       <div class="col col-sm-4">
         <span class="label">ID</span>
       </div>
       <div class="col col-sm-8">
-        <span>{{ group.id}}&nbsp;</span>
+        <span>{{ group._id}}&nbsp;</span>
       </div>
     </div>
     <div class="row">
@@ -38,7 +38,7 @@
         <span class="label">Public</span>
       </div>
       <div class="col col-sm-8">
-        <span>{{ group.public ? 'Oui' : 'Non' }}&nbsp;</span>
+        <span>{{ group.pub ? 'Oui' : 'Non' }}&nbsp;</span>
       </div>
     </div>
     <div class="row">
@@ -60,6 +60,7 @@
       </div>
     </div>
   </div>
+  <p v-if="error" style="text-align:center; color: #F00">{{ error }}</p>
   <p style="text-align:center;padding-top:50px;">
     <button class="btn btn-primary" @click="quitGroupDetail()">Back To Home</button>
   </p>
