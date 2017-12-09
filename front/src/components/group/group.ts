@@ -19,8 +19,12 @@ export class GroupComponent extends Vue {
 
     created() {
         this.axios = axios;
-        axios.get(process.env.ENDPOINT + 'api/groups/get/' + this.groupID)
-        .then((response) => {
+        let token = localStorage.getItem('token');
+        axios.get(process.env.ENDPOINT + 'api/groups/get/' + this.groupID, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        }).then((response) => {
             this.group = response.data.group;
             EventBus.$emit('latestGroup', new Date(Date.now()).toLocaleString() + ' - ' + this.group.name);
         })

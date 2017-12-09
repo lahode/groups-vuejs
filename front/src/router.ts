@@ -1,9 +1,12 @@
 import Vue from 'vue';
 import VueRouter, { Location, Route, RouteConfig } from 'vue-router';
 import { makeHot, reload } from './util/hot-reload';
+import axios, {AxiosResponse} from 'axios';
 
 const homeComponent = () => import('./components/home').then(({ HomeComponent }) => HomeComponent);
 const groupComponent = () => import('./components/group').then(({ GroupComponent }) => GroupComponent);
+const loginComponent = () => import('./components/login').then(({ LoginComponent }) => LoginComponent);
+
 // Charge New group component en lazy loading
 const newGroupComponent = resolve => {
   require.ensure(['./components/new-group'], () => {
@@ -15,7 +18,8 @@ if (process.env.ENV === 'development' && module.hot) {
   const homeModuleId = './components/home';
   // const newGroupModuleId = './components/new-group';
   const groupModuleId = './components/group';
-
+  const loginModuleId = './components/login';
+  
   makeHot(homeModuleId, homeComponent,
     module.hot.accept('./components/home', () => reload(homeModuleId, (<any>require('./components/home')).HomeComponent)));
 
@@ -24,6 +28,9 @@ if (process.env.ENV === 'development' && module.hot) {
 
   makeHot(groupModuleId, groupComponent,
     module.hot.accept('./components/group', () => reload(groupModuleId, (<any>require('./components/group')).GroupComponent)));
+
+  makeHot(loginModuleId, loginComponent,
+    module.hot.accept('./components/login', () => reload(loginModuleId, (<any>require('./components/login')).LoginComponent)));
 }
 
 Vue.use(VueRouter);
@@ -50,6 +57,11 @@ export const createRoutes: () => RouteConfig[] = () => [
     component: groupComponent,
     name: 'group',
     props: loadGroupfromRouter
+  },
+  {
+    path: '/login',
+    component: loginComponent,
+    name: 'login'
   },
   {
     path: '*',

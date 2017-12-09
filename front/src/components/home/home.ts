@@ -60,8 +60,12 @@ export class HomeComponent extends Vue {
         this.groups = [];
         let from = this.fromto.from;
         let to = this.fromto.to;
-        this.axios.get(process.env.ENDPOINT + 'api/groups/all/' + from + '/' + to)
-            .then((response) => {
+        let token = localStorage.getItem('token');
+        this.axios.get(process.env.ENDPOINT + 'api/groups/all/' + from + '/' + to, {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }).then((response) => {
                 this.groups = response.data.groups;
                 this.groupCount = response.data.total;
             })

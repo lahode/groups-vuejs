@@ -43,9 +43,13 @@ export class NewGroupComponent extends Vue {
     }
 
     save() {
+        let token = localStorage.getItem('token');
         this.group._id = undefined;
-        axios.post(process.env.ENDPOINT + 'api/groups/save/', this.group)
-        .then((response) => {
+        axios.post(process.env.ENDPOINT + 'api/groups/save/', this.group, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        }).then((response) => {
             this.groupSaved = true;
         })
         .catch((error) => {
